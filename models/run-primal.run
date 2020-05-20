@@ -1,0 +1,5 @@
+model svm-primal.mod;
+data data.dat;
+
+option solver cplex;
+solve;

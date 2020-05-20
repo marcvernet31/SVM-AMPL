@@ -6,7 +6,7 @@ param y {i in 1..m};
 param X {i in 1..m, j in 1..n};
 
 # the variables to find
-var w {i in 1..n}
+var w {i in 1..n};
 var b;
 var s {i in 1..m}
 
