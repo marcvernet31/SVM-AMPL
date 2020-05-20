@@ -2,6 +2,9 @@ reset;
 model 'primalSVM.mod';
 data 'primalSVM.dat';
 
+option solver "minos";
+solve;
+
 display w > 'output/w.txt';
 display gamma > 'output/gamma.txt';
 display s > 'output/s.txt';
