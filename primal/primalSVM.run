@@ -1,0 +1,19 @@
+reset;
+model 'primalSVM.mod';
+data 'primalSVM.dat';
+
+display w > 'output/w.txt';
+display gamma > 'output/gamma.txt';
+display s > 'output/s.txt';
+
+
+var results {i in 1..numElements} =
+	if (sum{j in 1..numVar}w[j] * x[i,j] + gamma > 0) then 1
+	else -1;
+	
+var numCorrect := 0;
+for{k in 1..numElements}{
+	if( results[k] == y[k]) 
+		then {let numCorrect := numCorrect + 1};
+}
+display numCorrect/numElements;
