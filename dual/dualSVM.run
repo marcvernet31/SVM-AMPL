@@ -1,13 +1,20 @@
+
 reset;
-model 'primalSVM.mod';
-data 'primalSVM.dat';
+model 'dualSVM.mod';
+data 'SVM.dat';
 
 option solver "minos";
 solve;
 
-display w > 'output/w.txt';
-display gamma > 'output/gamma.txt';
-display s > 'output/s.txt';
+var w{i in 1..numVar};
+for{i in 1..numVar}{
+	let w[i] := sum{j in 1..numElements} lambda[j]*y[j]*x[j,i];}
+
+var gamma;
+for{i in 1..numElements} { 
+	if lambda[i]>=0.001 && (lambda[i] + 0.001) < v then 
+		{ let gamma :=  (1/y[i]) - (sum{j in 1..numVar} w[j]*x[i,j]);};			
+}
 
 
 var results {i in 1..numElements} =
@@ -19,4 +26,7 @@ for{k in 1..numElements}{
 	if( results[k] == y[k]) 
 		then {let numCorrect := numCorrect + 1};
 }
+
 display numCorrect/numElements;
+display w > 'output/w_dual.txt';
+display gamma > 'output/gamma_dual.txt';
