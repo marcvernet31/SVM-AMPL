@@ -1,0 +1,12 @@
+param numElements := 100;
+param numVar := 4;
+param v := 10;
+
+read {m in 1..numElements, n in 1..(numVar + 1)} dataset[m,n] < "data/56789.dat";
+
+for{i in 1..numElements}{
+	for{j in 1..numVar}{
+		let x[i,j] := dataset[i,j];
+	}
+	let y[i] := dataset[i, numVar+1];
+}

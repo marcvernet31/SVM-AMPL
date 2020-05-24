@@ -1,13 +1,13 @@
 reset;
 model 'primalSVM.mod';
-data 'primalSVM.dat';
+data 'dataset_SVM.dat';
 
 option solver "minos";
 solve;
 
-display w > 'output/w.txt';
-display gamma > 'output/gamma.txt';
-display s > 'output/s.txt';
+display w > 'output/w_primal.txt';
+display gamma > 'output/gamma_primal.txt';
+display s > 'output/s_primal.txt';
 
 
 var results {i in 1..numElements} =
