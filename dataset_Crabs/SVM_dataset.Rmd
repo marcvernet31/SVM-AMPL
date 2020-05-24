@@ -1,0 +1,58 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(MASS)
+```
+
+```{r}
+data(crabs)
+crabs.data = as.data.frame(crabs[, c(4,5,6,7,8)])
+```
+
+F-M
+B-O
+
+```{r}
+gender = as.vector(crabs$sex)
+gender[gender == "M"] = "-1"
+gender[gender == "F"] = "1"
+```
+
+```{r}
+specie = as.vector(crabs$sp)
+specie[specie == "B"] = "-1"
+specie[specie == "O"] = "1"
+```
+
+```{r}
+crabs.gender = crabs.data
+crabs.gender$g = gender
+crabs.gender = data.matrix(crabs.gender)
+```
+
+```{r}
+write.table(crabs.gender, file="data/crabs_gender.txt", row.names=FALSE, col.names=FALSE)
+```
+
+```{r}
+crabs.specie = crabs.data
+crabs.specie$v = specie
+crabs.specie = data.matrix(crabs.specie)
+```
+
+```{r}
+write.table(crabs.specie, file="data/crabs_specie.txt", row.names=FALSE, col.names=FALSE)
+```
+
+```{r}
+nrow(crabs.specie)
+ncol(crabs.specie)
+```
+
