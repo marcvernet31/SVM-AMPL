@@ -1,0 +1,21 @@
+param numElements := 100;
+param numVar := 4;
+param v := 10;
+
+##Data for model generation / Train accuracy
+read {m in 1..numElements, n in 1..(numVar + 1)} dataset[m,n] < "data/1234.dat";
+for{i in 1..numElements}{
+	for{j in 1..numVar}{
+		let x[i,j] := dataset[i,j];
+	}
+	let y[i] := dataset[i, numVar+1];
+}
+
+##Data for Test Accuracy
+read {m in 1..numElements, n in 1..(numVar + 1)} dataset_test[m,n] < "data/56789.dat";
+for{i in 1..numElements}{
+	for{j in 1..numVar}{
+		let x_test[i,j] := dataset_test[i,j];
+	}
+	let y_test[i] := dataset_test[i, numVar+1];
+}
