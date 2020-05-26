@@ -1,0 +1,24 @@
+reset;
+model 'primalSVM.mod';
+data 'SVM.dat';
+
+option solver "minos";
+solve;
+
+var results {i in 1..numElements} =
+	if (sum{j in 1..numVar}w[j] * x[i,j] + gamma > 0) then 1
+	else -1;
+	
+var numCorrect := 0;
+for{k in 1..numElements}{
+	if( results[k] == y[k]) 
+		then {let numCorrect := numCorrect + 1};
+}
+
+#Train Accuracy
+display numCorrect/numElements;
+
+display w > 'output/w_primal.txt';
+display gamma > 'output/gamma_primal.txt';
+display s > 'output/s_primal.txt';
+
