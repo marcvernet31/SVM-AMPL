@@ -1,0 +1,36 @@
+reset;
+model 'primalTestSVM.mod';
+data 'dataset_SVM.dat';
+
+option solver "minos";
+solve;
+
+display w > 'output/w_primal.txt';
+display gamma > 'output/gamma_primal.txt';
+display s > 'output/s_primal.txt';
+
+#Train Accuracy
+var results {i in 1..numElements} =
+	if (sum{j in 1..numVar}w[j] * x[i,j] + gamma > 0) then 1
+	else -1;
+	
+var numCorrect := 0;
+for{k in 1..numElements}{
+	if( results[k] == y[k]) 
+		then {let numCorrect := numCorrect + 1};
+}
+display numCorrect/numElements;
+
+
+#Test Accuracy
+var results_test {i in 1..numElements} =
+	if (sum{j in 1..numVar}w[j] * x_test[i,j] + gamma > 0) then 1
+	else -1;
+	
+let numCorrect := 0;
+for{k in 1..numElements}{
+	if( results_test[k] == y_test[k]) 
+		then {let numCorrect := numCorrect + 1};
+}
+
+display numCorrect/numElements;
