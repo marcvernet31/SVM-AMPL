@@ -1,0 +1,61 @@
+---
+title: "SVM formulations"
+author: "jordi"
+date: "5/26/2020"
+output: html_document
+---
+
+separacio dels sempi plans
+
+$$
+w^Tx + \gamma \ge +1\\
+w^Tx + \gamma \le -1
+$$
+
+Primal:
+
+
+$$
+\begin{align}
+\displaystyle \min_{(w, \gamma, s) \in \mathbb{R} ^{n+1+m}} &\frac{1}{2}w^T·w+ \sum_{i=1}^{m} s_i\\
+s.\ to\ \  & y_i (w^T x_i + \gamma) + s_i \ge 1 & i = 1,..., m\\
+& s_i \ge 1                                     & i = 1,...,m
+\end{align}
+$$
+
+DUAL xungo
+
+$$
+\begin{align}
+\displaystyle \max_{(w, \gamma, s, \lambda, \mu)} &\frac{1}{2}w^T·w + \nu e^ts + \lambda^T \left( -Y(Aw+\gamma e) - s+e \right) - \mu^Ts \\
+s.\ to\ \  &w-(\lambda^T YA^T) = 0\\
+&\lambda^T Ye = 0\\
+&\nu e-\lambda-\mu = 0\\
+&\lambda \ge 0, \ \mu \ge 0\\
+
+\end{align}
+$$
+
+simplificated dual form
+
+$$
+\begin{align}
+\displaystyle \max_\lambda &\ \lambda^Te-\frac{1}{2} \lambda^T YAA^TY\lambda\\
+& \lambda^TYe=0\\
+&\nu e-\lambda-\mu = 0\\
+& 0 \le \lambda \le \nu\\
+\end{align}
+$$
+
+$$
+\mu = \nu e - \lambda
+$$
+
+
+KERNELS
+
+$$ K(x, y) = e^{-\frac{||x-y||^2}{2\sigma^2}} $$
+
+$$K(x, y) = x^Ty$$
+$$
+
