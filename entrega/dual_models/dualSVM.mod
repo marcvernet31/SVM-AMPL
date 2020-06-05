@@ -7,7 +7,7 @@ param dataset{m in 1..numElements, n in 1..(numVar + 1)};
 
 param x{m in 1..numElements, n in 1..numVar};
 param y{m in 1..numElements};
-param K{i in 1..numElements, j in 1..numElements} = (sum{k in 1..numVar}x[i,k]*x[j,k]);
+param K{i in 1..numElements, j in 1..numElements} = exp((sum{k in 1..numVar}x[i,k]*x[j,k]) / numVar);
 
 var lambda{m in 1..numElements} >= 0, <= v;
 
